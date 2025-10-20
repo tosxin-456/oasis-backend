@@ -52,7 +52,29 @@ const loginAdmin = async (req, res) => {
     }
 };
 
+// Get admin profile
+const getAdmin = async (req, res) => {
+    try {
+        // The `req.admin` comes from the JWT middleware (you’ll see that below)
+        const admin = await Admin.findById(req.admin.id).select("-password");
+
+        if (!admin) {
+            return res.status(404).json({ message: "Admin not found" });
+        }
+
+        res.json({
+            message: "Admin fetched successfully",
+            admin,
+        });
+    } catch (err) {
+        console.error("Error fetching admin:", err);
+        res.status(500).json({ message: "Failed to fetch admin" });
+    }
+};
+
+
 module.exports = {
     registerAdmin,
     loginAdmin,
+    getAdmin
 };
