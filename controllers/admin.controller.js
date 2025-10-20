@@ -25,6 +25,7 @@ const registerAdmin = async (req, res) => {
             admin: { id: admin._id, username: admin.username },
         });
     } catch (err) {
+        console.log(err)
         console.error(err);
         res.status(500).json({ message: "Error creating admin" });
     }
