@@ -3,7 +3,6 @@ const Admin = require("../models/admin.model");
 
 const protect = async (req, res, next) => {
     let token;
-
     if (
         req.headers.authorization &&
         req.headers.authorization.startsWith("Bearer")
@@ -14,6 +13,7 @@ const protect = async (req, res, next) => {
                 token,
                 process.env.JWT_SECRET || "secretkey"
             );
+            console.log(token)
 
             req.admin = await Admin.findById(decoded.id).select("_id username");
             next();

@@ -7,6 +7,9 @@ const mongoose = require("mongoose");
 
 const movieRoutes = require("./routes/movie.route");
 const adminRoutes = require("./routes/admin.route");
+const movieOfWeekRoutes = require("./routes/movieOfWeek.route");
+
+
 
 dotenv.config();
 
@@ -25,6 +28,7 @@ app.use(express.static(path.join(__dirname, "dist")));
 // ✅ Routes
 app.use("/api", movieRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/movie_of_week", movieOfWeekRoutes);
 
 // ✅ MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
