@@ -4,29 +4,52 @@ const Movie = require("../models/movies.model");
 // ➕ Add New Movie or Series
 const addNewMovie = async (req, res) => {
     try {
-        const { movieId, title, type, year, downloadUrl } = req.body;
+        const {
+            movieId,
+            title,
+            type,
+            downloadUrl,
+            poster,
+            backdrop,
+            overview,
+            genres,
+            releaseDate,
+            rating,
+            popularity,
+            originalLanguage,
+            voteCount,
+        } = req.body;
 
-        // Validate
-        if (!movieId || !title || !type || !year || !downloadUrl) {
-            return res.status(400).json({ message: "All fields are required" });
+        // ✅ Validate input before saving
+        if (!movieId || !title || !type || !downloadUrl) {
+            return res.status(400).json({ message: "Required fields missing" });
         }
 
-        // Prevent duplicate TMDB entries
+        // ✅ Prevent duplicate TMDB entries
         const existingMovie = await Movie.findOne({ movieId });
         if (existingMovie) {
             return res.status(400).json({ message: "Movie already exists" });
         }
 
-        // Increment number
+        // ✅ Auto-increment 'number' field
         const lastMovie = await Movie.findOne().sort({ number: -1 });
         const nextNumber = lastMovie ? lastMovie.number + 1 : 1;
 
-        // Save new
+        // ✅ Create new movie
         const newMovie = new Movie({
             movieId,
             title,
             type,
             downloadUrl,
+            poster,
+            backdrop,
+            overview,
+            genres,
+            releaseDate,
+            rating,
+            popularity,
+            originalLanguage,
+            voteCount,
             number: nextNumber,
         });
 
@@ -34,7 +57,7 @@ const addNewMovie = async (req, res) => {
 
         res.status(201).json({
             message: `${type === "series" ? "Series" : "Movie"} added successfully`,
-            newMovie,
+            movie: newMovie,
         });
     } catch (error) {
         console.error("Error saving movie:", error);

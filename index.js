@@ -8,7 +8,13 @@ const mongoose = require("mongoose");
 const movieRoutes = require("./routes/movie.route");
 const adminRoutes = require("./routes/admin.route");
 const movieOfWeekRoutes = require("./routes/movieOfWeek.route");
+// const { fetchOasisDB } = require("./utils/fetchAllMovies");
 
+
+// (async () => {
+//     const data = await fetchOasisDB();
+//     console.log("Total unique entries:", data.length);
+// })();
 
 
 dotenv.config();

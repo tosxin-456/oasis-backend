@@ -1,4 +1,3 @@
-// models/movies.model.js
 const mongoose = require("mongoose");
 
 const movieSchema = new mongoose.Schema(
@@ -21,9 +20,37 @@ const movieSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        poster: {
+            type: String, // Full URL of the poster
+        },
+        backdrop: {
+            type: String, // Full URL of the backdrop image
+        },
+        overview: {
+            type: String,
+        },
+        genres: {
+            type: [String],
+            default: [],
+        },
+        releaseDate: {
+            type: String,
+        },
+        rating: {
+            type: Number,
+        },
+        popularity: {
+            type: Number,
+        },
+        originalLanguage: {
+            type: String,
+        },
+        voteCount: {
+            type: Number,
+        },
         number: {
             type: Number,
-            required: true,
+            required: false,
         },
     },
     { timestamps: true }
