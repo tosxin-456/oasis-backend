@@ -95,5 +95,23 @@ const getAllMovies = async (req, res) => {
     }
 };
 
+const getMovieById = async (req, res) => {
+    try {
+        const { movieId } = req.params;
 
-module.exports = { addNewMovie, getAllMovies };
+        // Find movie by ID
+        const movie = await Movie.findOne({movieId});
+
+        if (!movie) {
+            return res.status(404).json({ message: "Movie not found" });
+        }
+
+        res.status(200).json(movie);
+    } catch (error) {
+        console.error("Error fetching movie:", error);
+        res.status(500).json({ message: "Failed to fetch movie" });
+    }
+};
+
+
+module.exports = { addNewMovie, getAllMovies, getMovieById };
