@@ -39,6 +39,7 @@ function isCrawler(req) {
 }
 
 // Movie route
+// Movie route
 app.get("/movie/:movieId", async (req, res) => {
     const { movieId } = req.params;
 
@@ -46,21 +47,21 @@ app.get("/movie/:movieId", async (req, res) => {
         try {
             const movie = await fetchMovieDetails(movieId);
             const html = `
-      <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta property="og:title" content="${movie.title}">
-          <meta property="og:description" content="${movie.overview}">
-          <meta property="og:image" content="${movie.poster}">
-          <meta property="og:url" content="https://oasis-peach-nine.vercel.app/movie/${movieId}">
-          <meta property="og:type" content="video.movie">
-          <title>${movie.title}</title>
-        </head>
-        <body>
-          <script>window.location.href="https://oasis-peach-nine.vercel.app/movie/${movieId}"</script>
-        </body>
-      </html>
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta property="og:title" content="${movie.title}">
+            <meta property="og:description" content="${movie.overview}">
+            <meta property="og:image" content="${movie.poster}">
+            <meta property="og:url" content="https://www.oasisplus.com.ng/movie/${movieId}">
+            <meta property="og:type" content="video.movie">
+            <title>${movie.title}</title>
+          </head>
+          <body>
+            <script>window.location.href="https://www.oasisplus.com.ng/movie/${movieId}"</script>
+          </body>
+        </html>
       `;
             return res.send(html);
         } catch (err) {
@@ -68,8 +69,10 @@ app.get("/movie/:movieId", async (req, res) => {
         }
     }
 
-    res.sendFile(path.resolve(distPath, "index.html"));
+    // ✅ Redirect users directly to the frontend domain
+    res.redirect(`https://www.oasisplus.com.ng/movie/${movieId}`);
 });
+
 
 // Series route
 app.get("/series/:seriesId", async (req, res) => {
@@ -79,21 +82,21 @@ app.get("/series/:seriesId", async (req, res) => {
         try {
             const series = await fetchSeriesDetails(seriesId);
             const html = `
-      <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta property="og:title" content="${series.title}">
-          <meta property="og:description" content="${series.overview}">
-          <meta property="og:image" content="${series.poster}">
-          <meta property="og:url" content="https://oasis-peach-nine.vercel.app/series/${seriesId}">
-          <meta property="og:type" content="video.tv_show">
-          <title>${series.title}</title>
-        </head>
-        <body>
-          <script>window.location.href="https://oasis-peach-nine.vercel.app/series/${seriesId}"</script>
-        </body>
-      </html>
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta property="og:title" content="${series.title}">
+            <meta property="og:description" content="${series.overview}">
+            <meta property="og:image" content="${series.poster}">
+            <meta property="og:url" content="https://www.oasisplus.com.ng/series/${seriesId}">
+            <meta property="og:type" content="video.tv_show">
+            <title>${series.title}</title>
+          </head>
+          <body>
+            <script>window.location.href="https://www.oasisplus.com.ng/series/${seriesId}"</script>
+          </body>
+        </html>
       `;
             return res.send(html);
         } catch (err) {
@@ -101,8 +104,10 @@ app.get("/series/:seriesId", async (req, res) => {
         }
     }
 
-    res.sendFile(path.resolve(distPath, "index.html"));
+    // ✅ Redirect users directly to the frontend domain
+    res.redirect(`https://www.oasisplus.com.ng/series/${seriesId}`);
 });
+
 
 // SPA fallback
 // app.get("/*", (req, res) => {
