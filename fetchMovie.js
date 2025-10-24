@@ -1,5 +1,6 @@
 // fetchMovie.js
-const fetch = require("node-fetch");
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+
 
 const API_KEY = "49e8f09b8364cf1348ed4f97e81039bb";
 const IMAGE_BASE = "https://image.tmdb.org/t/p/w500";

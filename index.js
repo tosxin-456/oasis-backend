@@ -105,9 +105,11 @@ app.get("/series/:seriesId", async (req, res) => {
 });
 
 // SPA fallback
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
-});
+// app.get("/*", (req, res) => {
+//     res.status(200).send("Frontend not built yet — index.html missing.");
+// });
+
+
 
 // ✅ MongoDB connection and server start
 mongoose
