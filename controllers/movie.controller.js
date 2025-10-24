@@ -68,6 +68,7 @@ const addNewMovie = async (req, res) => {
 // 📦 Fetch All Movies and Stats
 const getAllMovies = async (req, res) => {
     try {
+        console.log("here")
         // Fetch all movies and series (sorted by newest first)
         const allMovies = await Movie.find().sort({ createdAt: -1 });
 
@@ -90,7 +91,7 @@ const getAllMovies = async (req, res) => {
             allMovies, // includes everything in one array for full access
         });
     } catch (error) {
-        console.error("Error fetching movies:", error);
+        // console.error("Error fetching movies:", error);
         res.status(500).json({ message: "Failed to fetch movies" });
     }
 };
@@ -100,7 +101,7 @@ const getMovieById = async (req, res) => {
         const { movieId } = req.params;
 
         // Find movie by ID
-        const movie = await Movie.findOne({movieId});
+        const movie = await Movie.findOne({ movieId });
 
         if (!movie) {
             return res.status(404).json({ message: "Movie not found" });

@@ -4,11 +4,11 @@ const { addNewMovie, getAllMovies, getMovieById } = require("../controllers/movi
 
 // Add new
 router.post("/new_movies", addNewMovie);
+router.get("/all", getAllMovies);
 
 router.get("/:movieId", getMovieById);
 
 
 // Fetch all
-router.get("/all", getAllMovies);
 
 module.exports = router;
